@@ -1,45 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'signup_name.dart';
+import 'signup_password.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Paybae());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  Future<http.Response> buttonPressed() async {
-    http.Response returnedResult = await http.get(
-        Uri.parse('http://localhost:8000/paybae_auth/HelloDjango'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset-UTF-8'
-        });
-    print(returnedResult.body);
-    return returnedResult;
-  }
+class Paybae extends StatelessWidget {
+  const Paybae({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Clever Tech Memes',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: Scaffold(
-            appBar: AppBar(
-                centerTitle: true, title: const Text('Clever Tech Memes')),
-            body: Center(
-                child: Column(
-              children: [
-                Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: const Text('Welcome to PayBae!')),
-                Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: ElevatedButton(
-                      onPressed: buttonPressed, child: Text('Click!')),
-                )
-              ],
-            ))));
+      themeMode: ThemeMode.dark,
+      theme: ThemeData(
+        backgroundColor: Colors.black,
+        brightness: Brightness.dark,
+      ),
+      initialRoute: '/signup_name',
+      routes: {
+        // '/': (context) => const Home(),
+        '/signup_name': (context) => const signup_name(),
+        '/signup_password': (context) => const signup_password(),
+      },
+    );
   }
 }
