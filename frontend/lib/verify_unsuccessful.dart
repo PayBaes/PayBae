@@ -10,7 +10,7 @@ class verify_unsuccessful extends StatelessWidget {
       resizeToAvoidBottomInset: true,
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: SafeArea(
-        minimum: const EdgeInsets.symmetric(horizontal: 55.0),
+        minimum: const EdgeInsets.symmetric(horizontal: 60.0),
         child: Column(
           children: [
             Column(
@@ -47,7 +47,7 @@ class verify_unsuccessful extends StatelessWidget {
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
-                              Radius.circular(20.0),
+                              Radius.circular(10.0),
                             ),
                           ),
                         ))),
@@ -71,7 +71,7 @@ class verify_unsuccessful extends StatelessWidget {
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
-                              Radius.circular(20.0),
+                              Radius.circular(10.0),
                             ),
                           ),
                         ))),
@@ -93,7 +93,7 @@ class verify_unsuccessful extends StatelessWidget {
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
-                              Radius.circular(20.0),
+                              Radius.circular(10.0),
                             ),
                           ),
                         ))),
@@ -117,7 +117,7 @@ class verify_unsuccessful extends StatelessWidget {
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
-                              Radius.circular(20.0),
+                              Radius.circular(10.0),
                             ),
                           ),
                         ))),
@@ -144,28 +144,52 @@ class verify_unsuccessful extends StatelessWidget {
                 const SizedBox(
                   width: 0,
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    alignment: Alignment.center,
-                    primary: const Color.fromARGB(225, 95, 89, 225),
-                    onPrimary: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                Container(
+                  width: 350,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      alignment: Alignment.center,
+                      primary: const Color.fromARGB(225, 95, 89, 225),
+                      onPrimary: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
                     ),
+                    child: const Text(
+                      'Verify',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onPressed: () {
+                      
+                    },
                   ),
+                ),
+                // ElevatedButton(
+                //   style: ElevatedButton.styleFrom(
+                //     alignment: Alignment.center,
+                //     primary: const Color.fromARGB(225, 95, 89, 225),
+                //     onPrimary: Colors.white,
+                //     shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(20.0),
+                //     ),
+                //   ),
 
                   
-                  child: const Text(
-                    'Verify',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                  onPressed: () {
+                //   child: const Text(
+                //     'Verify',
+                //     style: TextStyle(
+                //       fontSize: 20.0,
+                //       color: Colors.white,
+                //     ),
+                //   ),
+                //   onPressed: () {
                     
-                  },
-                ),
+                //   },
+                // ),
               ],
             )
           ],

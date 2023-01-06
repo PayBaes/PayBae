@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'signup_name.dart';
+import 'signup.dart';
 import 'authenticate.dart';
 import 'verify_unsuccessful.dart';
+import 'verify_successful.dart';
 
 void main() {
   runApp(const Paybae());
@@ -18,13 +19,12 @@ class Paybae extends StatelessWidget {
         backgroundColor: Colors.black,
         brightness: Brightness.dark,
       ),
-      initialRoute: '/signup_name',
+      initialRoute: '/signup',
       routes: {
-        // '/': (context) => const Home(),
-        '/signup_name': (context) => const signup_name(),
-        //'/signup_password': (context) => const signup_password(),
+        '/signup': (context) => const signup(),
         '/authenticate': (context) => const authenticate(),
         '/verify_unsuccessful': (context) => const verify_unsuccessful(),
+        '/verify_successful': (context) => const verify_successful(),
       },
     );
   }

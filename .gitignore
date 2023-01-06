@@ -3,3 +3,4 @@ db.sqlite3
 .vscode
 backend/paybae_backend/.env
 .env
+venv

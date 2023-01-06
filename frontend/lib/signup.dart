@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-class signup_name extends StatelessWidget {
-  const signup_name({Key? key}) : super(key: key);
-  
-  
+bool _obscureText = true;
+
+class signup extends StatelessWidget {
+  const signup({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
+    return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: SafeArea(
@@ -24,7 +25,6 @@ class signup_name extends StatelessWidget {
             const SizedBox(
               height: 30.0,
             ),
-            
             const SizedBox(
                 width: 380,
                 child: TextField(
@@ -84,27 +84,38 @@ class signup_name extends StatelessWidget {
             const SizedBox(
               height: 20.0,
             ),
-            const SizedBox(
+            SizedBox(
                 width: 380,
                 child: TextField(
-                  style: TextStyle(
+                  obscureText: true,
+                  style: const TextStyle(
                     color: Colors.black,
                   ),
                   decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+                    suffixIcon: IconButton(
+                      icon: Icon(_obscureText
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        
+
+                        _obscureText = !_obscureText;
+                      },
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 16.0),
                     isDense: true,
                     filled: true,
                     fillColor: Colors.white,
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(20.0),
                       ),
                     ),
-                    prefixIcon: Icon(Icons.person),
+                    prefixIcon: Icon(Icons.password),
                     prefixIconColor: Colors.black,
                     hintText: 'Password',
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       color: Colors.black,
                     ),
                   ),
@@ -116,7 +127,7 @@ class signup_name extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 alignment: Alignment.center,
-                primary:  const Color.fromARGB(225, 95, 89, 225),
+                primary: const Color.fromARGB(225, 95, 89, 225),
                 onPrimary: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0),

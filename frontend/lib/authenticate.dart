@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-
-
-
-
-
-
-
-
 
 class authenticate extends StatelessWidget {
   const authenticate({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(horizontal: 55.0),
@@ -55,12 +47,12 @@ class authenticate extends StatelessWidget {
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
-                              Radius.circular(20.0),
+                              Radius.circular(10.0),
                             ),
                           ),
                         ))),
                 const SizedBox(
-                  width: 30,
+                  width: 20,
                 ),
                 SizedBox(
                     width: 50,
@@ -79,17 +71,16 @@ class authenticate extends StatelessWidget {
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
-                              Radius.circular(20.0),
+                              Radius.circular(10.0),
                             ),
                           ),
                         ))),
                 const SizedBox(
-                  width: 30,
+                  width: 20,
                 ),
                 const SizedBox(
                     width: 50,
                     child: TextField(
-                        
                         style: TextStyle(
                           color: Colors.black,
                         ),
@@ -101,12 +92,12 @@ class authenticate extends StatelessWidget {
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
-                              Radius.circular(20.0),
+                              Radius.circular(10.0),
                             ),
                           ),
                         ))),
                 const SizedBox(
-                  width: 30,
+                  width: 20,
                 ),
                 SizedBox(
                     width: 50,
@@ -125,7 +116,7 @@ class authenticate extends StatelessWidget {
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
-                              Radius.circular(20.0),
+                              Radius.circular(10.0),
                             ),
                           ),
                         ))),
@@ -139,34 +130,29 @@ class authenticate extends StatelessWidget {
                 const SizedBox(
                   width: 50,
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    alignment: Alignment.center,
-                    primary: const Color.fromARGB(225, 95, 89, 225),
-                    onPrimary: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                Container(
+                  width: 350,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      alignment: Alignment.center,
+                      primary: const Color.fromARGB(225, 95, 89, 225),
+                      onPrimary: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
                     ),
-                  ),
-                  child: const Text(
-                    'Verify',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.white,
+                    child: const Text(
+                      'Verify',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                      ),
                     ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/verify_successful');
+                    },
                   ),
-                  onPressed: () {
-                    // Navigator.pushNamed(context, '');
-                  },
-                ),
-                const SizedBox(
-              height: 80.0,
-            ),
-                FloatingActionButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/verify_unsuccessful');
-                  },
-                  child: const Icon(Icons.warning),
                 ),
               ],
             )
