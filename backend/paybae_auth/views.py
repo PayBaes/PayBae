@@ -6,12 +6,12 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 # Create your views here.
 
-# # Setup
-# @api_view(['GET'],)
-# @permission_classes([AllowAny],)
-# def HelloDjango(request):
-#     print("Hello Django!")
-#     return Response({"message": "Hello Django!"}, status=200)
+# Setup
+@api_view(['GET'],)
+@permission_classes([AllowAny],)
+def HelloDjango(request):
+    print("Hello Django!")
+    return Response({"message": "Hello Django!"}, status=200)
 
 
 #SignUp
@@ -46,7 +46,7 @@ class UserSerializer(serializers.ModelSerializer):
     def validate(self, data):
       if data["password"] != data["password2"]:
         raise serializers.ValidationError("Password does not match.")
-        return data
+      return data
 
     def create(self,validated_data):
         user=User.objects.create(
