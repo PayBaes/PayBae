@@ -5,8 +5,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 # Create your views here.
 
 # Setup
-# @api_view(['GET'],)
-# @permission_classes([AllowAny],)
-# def HelloDjango(request):
-#     print("Hello Django!")
-#     return Response({"message": "Hello Django!"}, status=200)
+@api_view(['GET'],)
+@permission_classes([AllowAny],)
+def HelloDjango(request):
+    print("Hello Django!")
+    return Response({"message": "Hello Django!"}, status=200)
