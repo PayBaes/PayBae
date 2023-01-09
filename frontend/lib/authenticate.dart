@@ -8,15 +8,23 @@ class authenticate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: Color.fromARGB(255, 0, 0, 0),
       body: SafeArea(
-        minimum: const EdgeInsets.symmetric(horizontal: 55.0),
+        //  minimum: const EdgeInsets.symmetric(horizontal: 60.0),
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/bg5.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        width: double.infinity,               
         child: Column(
           children: [
             Column(
               children: [
                 Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/nobg_logo.png',
                   height: 200.0,
                 ),
                 const Text(
@@ -28,12 +36,47 @@ class authenticate extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
+            Row(              
               children: [
+                const SizedBox(
+                  width: 70.0,
+                ),
                 SizedBox(
                     width: 50,
                     child: TextField(
+                      keyboardType: TextInputType.number,
+                       textInputAction: TextInputAction.next,
+                        autofocus: true,
                         inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                          LengthLimitingTextInputFormatter(1),
+                        ],
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
+                        decoration: const InputDecoration(
+                          
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 16.0),
+                          isDense: true,
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10.0),
+                            ),
+                          ),
+                        ))),
+                const SizedBox(
+                  width: 20,
+                ),
+                SizedBox(
+                    width: 50,
+                    child: TextField(
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.number,
+                        inputFormatters: [
+                           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                           LengthLimitingTextInputFormatter(1),
                         ],
                         style: const TextStyle(
@@ -54,33 +97,11 @@ class authenticate extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
-                SizedBox(
-                    width: 50,
-                    child: TextField(
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(1),
-                        ],
-                        style: const TextStyle(
-                          color: Colors.black,
-                        ),
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 16.0),
-                          isDense: true,
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
-                            ),
-                          ),
-                        ))),
-                const SizedBox(
-                  width: 20,
-                ),
                 const SizedBox(
                     width: 50,
                     child: TextField(
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.number,
                         style: TextStyle(
                           color: Colors.black,
                         ),
@@ -102,6 +123,8 @@ class authenticate extends StatelessWidget {
                 SizedBox(
                     width: 50,
                     child: TextField(
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.number,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(1),
                         ],
@@ -131,8 +154,8 @@ class authenticate extends StatelessWidget {
                   width: 50,
                 ),
                 Container(
-                  width: 350,
-                  height: 50,
+                  width: 250,
+                  height: 45,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       alignment: Alignment.center,
@@ -159,6 +182,9 @@ class authenticate extends StatelessWidget {
           ],
         ),
       ),
+
+        ),
+        
     );
   }
 }

@@ -1,21 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 bool _obscureText = true;
 
-class signup extends StatelessWidget {
+final passwordController = TextEditingController();
+
+class signup extends StatefulWidget {
   const signup({Key? key}) : super(key: key);
 
   @override
+  State<signup> createState() => _signupState();
+}
+
+class _signupState extends State<signup> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: Color.fromARGB(135, 0, 0, 0),
       body: SafeArea(
-        minimum: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
+          
+        child: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/bg5.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            
           children: [
             Image.asset(
-              'assets/images/logo.png',
+              'assets/images/nobg_logo.png',
               height: 200.0,
             ),
             const Text(
@@ -25,9 +43,11 @@ class signup extends StatelessWidget {
             const SizedBox(
               height: 30.0,
             ),
-            const SizedBox(
-                width: 380,
+            Container(
+              child: const SizedBox(
+                width: 300,
                 child: TextField(
+                  textInputAction: TextInputAction.next,
                   style: TextStyle(
                     color: Colors.black,
                   ),
@@ -51,13 +71,16 @@ class signup extends StatelessWidget {
                     ),
                   ),
                   maxLines: 1,
-                )),
+                )),),
+            
             const SizedBox(
               height: 20.0,
             ),
-            const SizedBox(
-                width: 380,
+            Container(
+              child: const SizedBox(
+                width: 300,
                 child: TextField(
+                  textInputAction: TextInputAction.next,
                   style: TextStyle(
                     color: Colors.black,
                   ),
@@ -80,26 +103,42 @@ class signup extends StatelessWidget {
                     ),
                   ),
                   maxLines: 1,
-                )),
+                )),),
+
+            
             const SizedBox(
               height: 20.0,
             ),
-            SizedBox(
-                width: 380,
+            Container(
+              child: SizedBox(
+                width: 300,
                 child: TextField(
-                  obscureText: true,
+                  textInputAction: TextInputAction.done,
+                 
+                  controller: passwordController,
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(8),
+                    
+                  ],
+                  obscureText: _obscureText,
                   style: const TextStyle(
                     color: Colors.black,
                   ),
                   decoration: InputDecoration(
+                    errorStyle: const TextStyle(
+                      color: Colors.red,
+                    ),
+                    errorText: passwordController.text.length < 8
+                        ? 'Password must be at least 8 characters'
+                        : null,
                     suffixIcon: IconButton(
                       icon: Icon(_obscureText
                           ? Icons.visibility
                           : Icons.visibility_off),
                       onPressed: () {
-                        
-
-                        _obscureText = !_obscureText;
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
                       },
                     ),
                     contentPadding: const EdgeInsets.symmetric(
@@ -112,7 +151,7 @@ class signup extends StatelessWidget {
                         Radius.circular(20.0),
                       ),
                     ),
-                    prefixIcon: Icon(Icons.password),
+                    prefixIcon: const Icon(Icons.password),
                     prefixIconColor: Colors.black,
                     hintText: 'Password',
                     hintStyle: const TextStyle(
@@ -121,10 +160,16 @@ class signup extends StatelessWidget {
                   ),
                   maxLines: 1,
                 )),
+
+            ),
+            
             const SizedBox(
               height: 30.0,
             ),
-            ElevatedButton(
+            Container(
+              width: 250.0,
+              height: 45.0,
+              child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 alignment: Alignment.center,
                 primary: const Color.fromARGB(225, 95, 89, 225),
@@ -144,9 +189,18 @@ class signup extends StatelessWidget {
                 Navigator.pushNamed(context, '/authenticate');
               },
             ),
+            ),
           ],
         ),
-      ),
+      
+
+        ),
+        
+          
+
+        ),
+       
+        
     );
   }
 }
