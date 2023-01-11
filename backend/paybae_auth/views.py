@@ -21,3 +21,9 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = UserSerializer
     queryset = get_user_model().objects.all()
+# Setup
+@api_view(['GET'],)
+@permission_classes([AllowAny],)
+def HelloDjango(request):
+    print("Hello Django!")
+    return Response({"message": "Hello Django!"}, status=200)
