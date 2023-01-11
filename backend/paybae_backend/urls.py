@@ -15,10 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+from rest_framework.routers import DefaultRouter
+from paybae_auth.views import UserViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
+     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+router = DefaultRouter()
+router.register('Login',UserViewSet,basename='Login')
 
-# add url patternm for paybae_auth
+
+
+# # add url patternm for paybae_auth
 urlpatterns += [path('paybae_auth/', include('paybae_auth.urls'))]
+urlpatterns += router.urls
