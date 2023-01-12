@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+
 bool _obscureText = true;
 
-final passwordController = TextEditingController();
+// final passwordController = TextEditingController();
+
+class MultiController {
+  final _textController3 = TextEditingController();
+  final passwordController = TextEditingController();
+}
 
 class signup extends StatefulWidget {
+
   const signup({Key? key}) : super(key: key);
 
   @override
@@ -13,6 +20,55 @@ class signup extends StatefulWidget {
 }
 
 class _signupState extends State<signup> {
+
+  
+
+  bool _hasInput1 = false;
+  bool _hasInput2 = false;
+  bool _hasInput3 = false;
+  final _textController1 = TextEditingController();
+  final _textController2 = TextEditingController();
+  final _textController3 = TextEditingController();
+  
+  @override
+  void initState() {
+    super.initState();
+    _textController1.addListener(_onTextChanged1);
+    _textController2.addListener(_onTextChanged2);
+    _textController3.addListener(_onTextChanged3);
+  }
+
+  @override
+  void dispose() {
+    _textController1.dispose();
+    _textController2.dispose();
+    _textController3.dispose();
+    super.dispose();
+  }
+
+  void _onTextChanged1() {
+    setState(() {
+      _hasInput1 = _textController1.text.trim().isNotEmpty;
+    });
+  }
+
+  void _onTextChanged2() {
+    setState(() {
+      _hasInput2 = _textController2.text.trim().isNotEmpty;
+    });
+  }
+
+  void _onTextChanged3() {
+    setState(() {
+      _hasInput3 = _textController3.text.trim().isNotEmpty;
+    });
+  }
+
+  final MultiController _multiController = MultiController();
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,14 +100,15 @@ class _signupState extends State<signup> {
               height: 30.0,
             ),
             Container(
-              child: const SizedBox(
+              child: SizedBox(
                 width: 300,
                 child: TextField(
+                  controller: _textController1,
                   textInputAction: TextInputAction.next,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                   ),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
                     isDense: true,
@@ -77,14 +134,15 @@ class _signupState extends State<signup> {
               height: 20.0,
             ),
             Container(
-              child: const SizedBox(
+              child: SizedBox(
                 width: 300,
                 child: TextField(
+                  controller: _textController2,
                   textInputAction: TextInputAction.next,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                   ),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
                     isDense: true,
@@ -115,7 +173,7 @@ class _signupState extends State<signup> {
                 child: TextField(
                   textInputAction: TextInputAction.done,
                  
-                  controller: passwordController,
+                  controller: _multiController._textController3,
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(8),
                     
@@ -128,7 +186,7 @@ class _signupState extends State<signup> {
                     errorStyle: const TextStyle(
                       color: Colors.red,
                     ),
-                    errorText: passwordController.text.length < 8
+                    errorText: _multiController._textController3.text.length < 8
                         ? 'Password must be at least 8 characters'
                         : null,
                     suffixIcon: IconButton(
@@ -178,6 +236,9 @@ class _signupState extends State<signup> {
                   borderRadius: BorderRadius.circular(20.0),
                 ),
               ),
+              onPressed: _hasInput1 && _hasInput2 ? () {
+                Navigator.pushNamed(context, '/authenticate');
+              } : null,
               child: const Text(
                 'Sign Up',
                 style: TextStyle(
@@ -185,22 +246,42 @@ class _signupState extends State<signup> {
                   color: Colors.white,
                 ),
               ),
-              onPressed: () {
-                Navigator.pushNamed(context, '/authenticate');
-              },
             ),
+            
+            ),
+            const SizedBox(
+              height: 0.0,
+            ),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 90.0,
+                ),
+                const Text(
+                  'Already have an account?',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.white,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/signin');
+                  },
+                  child: const Text(
+                    'Sign In',
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
-      
-
         ),
-        
-          
-
-        ),
-       
-        
+        ), 
     );
   }
 }

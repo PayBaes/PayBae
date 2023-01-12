@@ -1,132 +1,220 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
-class verify_unsuccessful extends StatelessWidget {
+class verify_unsuccessful extends StatefulWidget {
   const verify_unsuccessful({Key? key}) : super(key: key);
+
+  @override
+  State<verify_unsuccessful> createState() => _verify_unsuccessfulState();
+}
+
+class _verify_unsuccessfulState extends State<verify_unsuccessful> {
+  bool _hasInput1 = false;
+  bool _hasInput2 = false;
+  bool _hasInput3 = false;
+  bool _hasInput4 = false;
+
+  final _textController1 = TextEditingController();
+  final _textController2 = TextEditingController();
+  final _textController3 = TextEditingController();
+  final _textController4 = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _textController1.addListener(_onTextChanged1);
+    _textController2.addListener(_onTextChanged2);
+    _textController3.addListener(_onTextChanged3);
+    _textController4.addListener(_onTextChanged4);
+  }
+
+  @override
+  void dispose() {
+    _textController1.dispose();
+    _textController2.dispose();
+    _textController3.dispose();
+    _textController4.dispose();
+    super.dispose();
+  }
+
+  void _onTextChanged1() {
+    setState(() {
+      _hasInput1 = _textController1.text.trim().isNotEmpty;
+    });
+  }
+
+  void _onTextChanged2() {
+    setState(() {
+      _hasInput2 = _textController2.text.trim().isNotEmpty;
+    });
+  }
+
+  void _onTextChanged3() {
+    setState(() {
+      _hasInput3 = _textController3.text.trim().isNotEmpty;
+    });
+  }
+
+  void _onTextChanged4() {
+    setState(() {
+      _hasInput4 = _textController4.text.trim().isNotEmpty;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Color.fromARGB(255, 0, 0, 0),
       body: SafeArea(
-        minimum: const EdgeInsets.symmetric(horizontal: 60.0),
-        child: Column(
-          children: [
-            Column(
-              children: [
-                Image.asset(
-                  'assets/images/logo.png',
-                  height: 200.0,
-                ),
-                const Text(
-                  'One Time Password',
-                  style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 80.0,
-                ),
-              ],
+        child: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/bg5.jpg'),
+              fit: BoxFit.cover,
             ),
-            Row(
-              children: [
-                SizedBox(
-                    width: 50,
-                    child: TextField(
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(1),
-                        ],
-                        style: const TextStyle(
-                          color: Colors.black,
-                        ),
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 16.0),
-                          isDense: true,
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
-                            ),
+          ),
+          width: double.infinity,
+          child: Column(
+            children: [
+              Column(
+                children: [
+                  Image.asset(
+                    'assets/images/nobg_logo.png',
+                    height: 200.0,
+                  ),
+                  const Text(
+                    'One Time Password',
+                    style:
+                        TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 80.0,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 70.0,
+                  ),
+                  SizedBox(
+                      width: 50,
+                      child: TextField(
+                          controller: _textController1,
+                          keyboardType: TextInputType.number,
+                          textInputAction: TextInputAction.next,
+                          autofocus: true,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                            LengthLimitingTextInputFormatter(1),
+                          ],
+                          style: const TextStyle(
+                            color: Colors.black,
                           ),
-                        ))),
-                const SizedBox(
-                  width: 30,
-                ),
-                SizedBox(
-                    width: 50,
-                    child: TextField(
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(1),
-                        ],
-                        style: const TextStyle(
-                          color: Colors.black,
-                        ),
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 16.0),
-                          isDense: true,
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 16.0),
+                            isDense: true,
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
                             ),
+                          ))),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  SizedBox(
+                      width: 50,
+                      child: TextField(
+                          controller: _textController2,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                            LengthLimitingTextInputFormatter(1),
+                          ],
+                          style: const TextStyle(
+                            color: Colors.black,
                           ),
-                        ))),
-                const SizedBox(
-                  width: 30,
-                ),
-                const SizedBox(
-                    width: 50,
-                    child: TextField(
-                        
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 16.0),
-                          isDense: true,
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 16.0),
+                            isDense: true,
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
                             ),
+                          ))),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  SizedBox(
+                      width: 50,
+                      child: TextField(
+                          controller: _textController3,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                            LengthLimitingTextInputFormatter(1),
+                          ],
+                          style: const TextStyle(
+                            color: Colors.black,
                           ),
-                        ))),
-                const SizedBox(
-                  width: 30,
-                ),
-                SizedBox(
-                    width: 50,
-                    child: TextField(
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(1),
-                        ],
-                        style: const TextStyle(
-                          color: Colors.black,
-                        ),
-                        decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 16.0),
-                          isDense: true,
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10.0),
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 16.0),
+                            isDense: true,
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
                             ),
+                          ))),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  SizedBox(
+                      width: 50,
+                      child: TextField(
+                          controller: _textController4,
+                          textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                            LengthLimitingTextInputFormatter(1),
+                          ],
+                          style: const TextStyle(
+                            color: Colors.black,
                           ),
-                        ))),
-              ],
-            ),
-            const SizedBox(
-              height: 30.0,
-            ),
-            const Text("Enter Correct OTP",
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 16.0),
+                            isDense: true,
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                            ),
+                          ))),
+                ],
+              ),
+               const SizedBox(
+                height: 20.0,
+              ),
+              const Text("Enter Correct OTP",
                 style: TextStyle(
                   letterSpacing: 7.0,
                   fontSize: 15.0,
@@ -134,65 +222,54 @@ class verify_unsuccessful extends StatelessWidget {
                 )
               
             ),
-            const SizedBox(
-              height: 60.0,
-            ),
-            
-          
-            Column(
-              children: [
-                const SizedBox(
-                  width: 0,
-                ),
-                Container(
-                  width: 350,
-                  height: 50,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      alignment: Alignment.center,
-                      primary: const Color.fromARGB(225, 95, 89, 225),
-                      onPrimary: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                    child: const Text(
-                      'Verify',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.white,
-                      ),
-                    ),
-                    onPressed: () {
-                      
-                    },
+              const SizedBox(
+                height: 60.0,
+              ),
+              Column(
+                children: [
+                  const SizedBox(
+                    width: 50,
                   ),
-                ),
-                // ElevatedButton(
-                //   style: ElevatedButton.styleFrom(
-                //     alignment: Alignment.center,
-                //     primary: const Color.fromARGB(225, 95, 89, 225),
-                //     onPrimary: Colors.white,
-                //     shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(20.0),
-                //     ),
-                //   ),
-
-                  
-                //   child: const Text(
-                //     'Verify',
-                //     style: TextStyle(
-                //       fontSize: 20.0,
-                //       color: Colors.white,
-                //     ),
-                //   ),
-                //   onPressed: () {
-                    
-                //   },
-                // ),
-              ],
-            )
-          ],
+                  Container(
+                    width: 250,
+                    height: 45,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        alignment: Alignment.center,
+                        primary: const Color.fromARGB(225, 95, 89, 225),
+                        onPrimary: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                      onPressed:
+                          _hasInput1 && _hasInput2 && _hasInput3 && _hasInput4
+                              ? () {
+                                  if (_textController1.text == "0" &&
+                                      _textController2.text == "0" &&
+                                      _textController3.text == "0" &&
+                                      _textController4.text == "0") {
+                                    Navigator.pushNamed(
+                                        context, '/verify_successful');
+                                  } else {
+                                    Navigator.pushNamed(
+                                        context, '/verify_unsuccessful');
+                                  }
+                                }
+                              : null,
+                      child: const Text(
+                        'Verify',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

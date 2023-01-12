@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_frontend/login.dart';
 import 'package:flutter_frontend/signup.dart';
 
 class splashscreen extends StatefulWidget {
@@ -12,9 +13,9 @@ class SplashScreenState extends State<splashscreen> {
   void initState() {
     super.initState();
     Timer(
-        Duration(seconds: 5),
+        Duration(seconds: 3),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => signup())));
+            context, MaterialPageRoute(builder: (context) => login())));
   }
 
   @override
