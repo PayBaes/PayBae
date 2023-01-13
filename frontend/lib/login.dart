@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'login_controller.dart';
 
 bool _obscureText = true;
+
 
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
@@ -10,11 +15,14 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  GoogleSignInAccount? _currentUser;
+
   bool _hasInput4 = false;
   bool _hasInput5 = false;
 
   final _textController4 = TextEditingController();
   final _textController5 = TextEditingController();
+  final controller = Get.put(loginController());
 
   @override
   void initState() {
@@ -41,7 +49,6 @@ class _loginState extends State<login> {
       _hasInput5 = _textController5.text.trim().isNotEmpty;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -209,54 +216,49 @@ class _loginState extends State<login> {
               Row(
                 children: [
                   const SizedBox(
-
                     width: 100.0,
                   ),
-                  Container(                 
+                  Container(
                     child: InkWell(
-                      onTap:() {},
-                      child: Image.asset(
-                        'assets/images/google-icon.png',
-                        height: 40.0,
-                        width: 40.0,
-                      )
-                    ),
+                        onTap: () {
+                          GoogleSignIn().signIn();
+                        },
+                        child: Image.asset(
+                          'assets/images/google-icon.png',
+                          height: 40.0,
+                          width: 40.0,
+                        )),
                   ),
-                   const SizedBox(
+                  const SizedBox(
                     width: 30.0,
-                   ),
-                   Container(
+                  ),
+                  Container(
                     child: InkWell(
-                      onTap:() {},
-                      child: Image.asset(
-                        'assets/images/fb.png',
-                        height: 40.0,
-                        width: 40.0,
-                      )
-                    ),
-
-                   ),
-                   const SizedBox(
+                        onTap: () {},
+                        child: Image.asset(
+                          'assets/images/fb.png',
+                          height: 40.0,
+                          width: 40.0,
+                        )),
+                  ),
+                  const SizedBox( 
                     width: 30.0,
-                   ),
-                   Container(
+                  ),
+                  Container(
                     child: InkWell(
-                      onTap:() {},
-                      child: Image.asset(
-                        'assets/images/twitter.png',
-                        height: 40.0,
-                        width: 40.0,
-                      )
-                    ),
-
-                   )
-
+                        onTap: () {},
+                        child: Image.asset(
+                          'assets/images/twitter.png',
+                          height: 40.0,
+                          width: 40.0,
+                        )),
+                  ),
+                  
                 ],
               )
             ],
           ),
-        )
-        )
-        );
+        )));
   }
 }
+
